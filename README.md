@@ -1,4 +1,4 @@
-# 线报库消息推送脚本
+# 线报酷消息推送脚本
 线报酷消息推送通知，适用于iphone端，主要使用了ios的bark应用程序来进行推送
 
 # 如何使用
@@ -27,4 +27,10 @@ pip3 install requests
 # 运行
 ```python
 python3 push.py &
+```
+
+# 其它命令
+```shell
+# 杀掉运行的脚本进程
+ps -ef | grep push.py | grep -v grep | awk '{print $2}' | xargs kill -9
 ```
