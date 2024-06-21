@@ -23,3 +23,8 @@ pip3 install barknotificator
 pip3 install redis
 pip3 install requests
 ```
+
+# 运行
+```python
+python3 push.py &
+```
