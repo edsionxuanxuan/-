@@ -5,6 +5,7 @@ from datetime import datetime
 
 
 from apscheduler.schedulers.blocking import BlockingScheduler
+from BarkNotificator import BarkNotificator
 from redis import Redis
 from requests import sessions
 
@@ -140,7 +141,7 @@ def push_bark(contents):
         #             "body": content.content
         #             # "url": content.url,
         #         })
-        from BarkNotificator import BarkNotificator
+
         bark = BarkNotificator(device_token=BARK_DEVICE_TOKEN)
         for content in contents:
             bark.send(title=content.title, content=content.content, target_url=content.url)
