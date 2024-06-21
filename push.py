@@ -149,10 +149,14 @@ def push_bark(contents):
 
 def signal_handler(Signal, Frame):
     import sys
+    logger.info("【redis】退出并清空redis中的缓存数据")
+    rs = RedisServer()
+    rs.client.delete(IXBK_ID)
+    rs.client.delete(IXBK_IDS)
     sys.exit(0)
 
 
-signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGTERM, signal_handler)
 
 
 def main():
@@ -175,10 +179,4 @@ if __name__ == '__main__':
         scheduler.start()
     except KeyboardInterrupt:
         logger.info("捕获到 Ctrl+C 异常，准备退出")
-    finally:
-        logger.info("【redis】退出并清空redis中的缓存数据")
-        rs = RedisServer()
-        rs.client.delete("xbk_1")
-        rs.client.delete("xbk_ids")
-
-
+        signal_handler(signal.SIGINT, None)

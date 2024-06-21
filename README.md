@@ -32,5 +32,5 @@ python3 push.py &
 # 其它命令
 ```shell
 # 杀掉运行的脚本进程
-ps -ef | grep push.py | grep -v grep | awk '{print $2}' | xargs kill -9
+ps -ef | grep push.py | grep -v grep | awk '{print $2}' | xargs kill -15
 ```
