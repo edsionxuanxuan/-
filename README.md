@@ -33,4 +33,9 @@ python3 push.py &
 ```shell
 # 杀掉运行的脚本进程
 ps -ef | grep push.py | grep -v grep | awk '{print $2}' | xargs kill -15
+
+# 定时任务(每天凌晨2点停止脚本运行，5点启动脚本)
+>> crontab -e
+0 2 * * * ps -ef | grep push.py | grep -v grep | awk '{print $2}' | xargs kill -15 
+0 5 * * * /usr/local/bin/python3 /root/py_demo/push.py &
 ```

@@ -3,7 +3,6 @@ import signal
 from dataclasses import dataclass
 from datetime import datetime
 
-
 from apscheduler.schedulers.blocking import BlockingScheduler
 from BarkNotificator import BarkNotificator
 from redis import Redis
@@ -25,7 +24,7 @@ REDIS_PORT=6379
 REDIS_DB=0
 REDIS_PASSWORD=""
 
-#数据id
+# 数据id
 IXBK_ID = "xbk_1"
 IXBK_ID_EX = 600  # 10分钟左右重新清空数据库
 IXBK_IDS = "xbk_ids"
@@ -84,9 +83,8 @@ def request_xbk():
 # 处理数据
 def handle_data(data):
     # 返回列表嵌套的对象
-    contents = []
-    for dic in data:
-        con = Content(
+    return [
+        Content(
             id=dic["id"],
             title=dic["title"],
             content=dic["content"],
@@ -95,8 +93,8 @@ def handle_data(data):
             catename=dic["catename"],
             louzhu=dic["louzhu"]
         )
-        contents.append(con)
-    return contents
+        for dic in data
+    ]
 
 
 # 判断id是否已经发送过
@@ -147,7 +145,7 @@ def push_bark(contents):
             bark.send(title=content.title, content=content.content, target_url=content.url)
 
 
-def signal_handler(Signal, Frame):
+def signal_handler(signum, frame_type):
     import sys
     logger.info("【redis】退出并清空redis中的缓存数据")
     rs = RedisServer()
@@ -156,6 +154,7 @@ def signal_handler(Signal, Frame):
     sys.exit(0)
 
 
+# 捕获kill -15
 signal.signal(signal.SIGTERM, signal_handler)
 
 
