@@ -6,7 +6,7 @@
 
 2.需要一台服务器，阿里云，腾讯云等等都可，没什么太大配置要求
 
-3.本人使用的ubutu18.04.6 LTS
+3.本人使用的ubuntu18.04.6 LTS
 
 4.需要在服务器上安装python3.11.x版本(自行度娘安装),不建议使用服务器自带的低版本python3.6.x
 
@@ -18,15 +18,15 @@
 
 # 安装依赖库
 ```python
-pip3 install apscheduler
-pip3 install barknotificator
-pip3 install redis
-pip3 install requests
+pip install apscheduler
+pip install barknotificator
+pip install redis
+pip install requests
 ```
 
 # 运行
 ```python
-python3 push.py &
+python push.py &
 ```
 
 # 其它命令
@@ -37,5 +37,5 @@ ps -ef | grep push.py | grep -v grep | awk '{print $2}' | xargs kill -15
 # 定时任务(每天凌晨2点停止脚本运行，5点启动脚本)
 >> crontab -e
 0 2 * * * ps -ef | grep push.py | grep -v grep | awk '{print $2}' | xargs kill -15 
-0 5 * * * /usr/local/bin/python3 /root/py_demo/push.py &
+0 5 * * * /usr/local/bin/python3 /root/push.py &
 ```
