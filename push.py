@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("__name__")
 
 # 线报酷url
-IXBK_URL = "http://new.ixbk.net"
+IXBK_URL = "http://new.xianbao.fun"
 IXBK_PLUS = IXBK_URL + "/plus/json/push.json"
 
 # BARK
